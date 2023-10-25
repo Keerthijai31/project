@@ -1,0 +1,177 @@
+SELECT
+    e.EMPLOYEE_ID AS EmployeeID,
+    e.FIRST_NAME AS EmployeeFirstName,
+    m.EMPLOYEE_ID AS ManagerID,
+    m.FIRST_NAME AS ManagerFirstName
+    from
+    EMPLOYEES e
+left JOIN
+    EMPLOYEES m
+ON
+    e.MANAGER_ID = m.EMPLOYEE_ID;
+
+
+--------------------------------------------------------------
+
+
+In MySQL, set operators are used to combine the results of two or more SELECT queries. 
+The three primary set operators in MySQL are:
+
+UNION: This operator is used to combine the results of two or more SELECT statements into a single result set.
+ It removes duplicates by default but can include duplicates using UNION ALL.
+
+INTERSECT: MySQL does not natively support the INTERSECT operator. 
+To achieve the same result, you can use a combination of INNER JOIN or EXISTS subqueries.
+
+EXCEPT or MINUS: MySQL does not natively support the EXCEPT or MINUS operator either. Y
+ou can achieve the same result using a LEFT JOIN or NOT EXISTS subqueries.
+--------------------------------------------------------------------------------
+-- Create two sample tables: employees and contractors.
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50)
+);
+
+CREATE TABLE contractors (
+    contractor_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50)
+);
+
+-- Insert sample data into the tables.
+INSERT INTO employees (employee_id, first_name, last_name) VALUES
+    (1, 'John', 'Doe'),
+    (2, 'Alice', 'Smith'),
+    (3, 'Bob', 'Johnson');
+
+INSERT INTO contractors (contractor_id, first_name, last_name) VALUES
+    (101, 'Sarah', 'Williams'),
+    (102, 'John', 'Doe'),
+    (103, 'Ella', 'Brown');
+-----------------------------------------------------------------------------------------------------------------
+
+Why do We Need NULL Values?
+Null functions are required to perform operations on null values ​​stored in the database. 
+With NULL values, we can perform operations that clearly identify
+ whether the value is null or not. With this ability to recognize null data,  
+operations similar to SQL’s join methods can be performed on them.
+-------------------------------------------
+In MySQL, ISNULL() function is used to test whether an expression is NULL or not. 
+If the expression is NULL it returns TRUE, else FALSE. 
+
+SELECT column(s)
+FROM table_name
+WHERE ISNULL(column_name);
+-------------------------------------------------------
+
+IFNULL()
+This function is available in MySQL, and not in SQL Server or Oracle. This function take two arguments. 
+If the first argument is not NULL, the function returns the first argument.
+ Otherwise, the second argument is returned. This function is commonly used to replace NULL value with another value. 
+Syntax:
+SELECT column(s), IFNULL(column_name, value_to_replace)
+FrOM table_name;
+
+COALESCE()
+COALESCE function in SQL returns the first non-NULL expression among its arguments.
+ If all the expressions evaluate to null, then the COALESCE function will return null. 
+Syntax:
+SELECT column(s), CAOLESCE(expression_1,….,expression_n)
+
+FROM table_name;
+
+
+select * from Employees
+select * from departments
+
+select e.employee_id, e.first_name, e.salary, d.department_name
+from employees e
+join departments d
+on e.department_id = d.department_id
+order by e.employee_id
+
+--self joining
+ SELECT
+    e.EMPLOYEE_ID AS EmployeeID,
+    e.FIRST_NAME AS EmployeeFirstName,
+    m.EMPLOYEE_ID AS ManagerID,
+    m.FIRST_NAME AS ManagerFirstName
+    from
+    EMPLOYEES e
+left JOIN
+EMPLOYEES m
+ON
+e.MANAGER_ID = m.EMPLOYEE_ID;
+
+
+-- Create two sample tables: employees and contractors.
+CREATE TABLE workers (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50)
+);
+
+CREATE TABLE contractors (
+    contractor_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50)
+);
+
+-- Insert sample data into the tables.
+INSERT INTO workers (employee_id, first_name, last_name) VALUES
+    (1, 'John', 'Doe'),
+    (2, 'Alice', 'Smith'),
+    (3, 'Bob', 'Johnson');
+
+INSERT INTO contractors (contractor_id, first_name, last_name) VALUES
+    (101, 'Sarah', 'Williams'),
+    (102, 'John', 'Doe'),
+    (103, 'Ella', 'Brown');
+    
+    INSERT INTO workers (employee_id, first_name, last_name) VALUES(102, 'John', 'Doe'),
+    (103, 'Ella', 'Brown');
+ 
+ INSERT INTO contractors (contractor_id, first_name, last_name) VALUES
+ (2, 'Alice', 'Smith')
+ select * from workers
+ except
+ select * from contractors
+
+SELECT  employee_id , first_name,commission_pct
+FROM employees
+WHERE ISNULL(commission_pct);
+
+create table students (id int,
+					 student_name varchar,
+                      mother_no varchar,
+                      father_no varchar ,
+                      guardian_no varchar)
+                      
+
+CREATE TABLE students (
+    id INT,
+    student_name VARCHAR(255), -- You can specify the maximum length for the name
+    mother_no VARCHAR(20),    -- You can specify the maximum length for phone numbers
+    father_no VARCHAR(20),
+    guardian_no VARCHAR(20)
+);
+
+insert into students values (id , student_name, mother_no , father_name, guardian_no )
+values(1, "rama","8989008080",null, null)
+
+select * from students
+
+INSERT INTO students (id, student_name, mother_no, father_no, guardian_no)
+VALUES
+    (2, 'priya', NULL, '898997978', NULL),
+    (3, 'JAYA', NULL, NULL, '97979789'),
+    (4, 'kani', NULL, '88787883', NULL),
+    (5, 'viswa', '87899', NULL, NULL);
+
+SELECT student_name, COALESCE(mother_no, father_no, guardian_no) AS contact_number
+FROM Students;
+
+SELECT student_name, IFNULL(mother_no, father_no) as Contact
+FROM students;
+
