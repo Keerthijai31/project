@@ -1,0 +1,65 @@
+select * from employees
+select * from Countries
+--- Select need column 
+select first_name name,
+        email  mailid,
+        salary  income,
+        hire_date  joininingdate
+from employees
+
+--where is used to filter the data 
+
+Select * from employees
+where employee_id  > 108
+
+Select * from employees
+where salary > 10000
+
+---Order by  asc or desc
+
+select *from employees
+order by first_name desc
+
+select *from employees
+order by salary desc,first_name asc
+
+--distinct 
+select distinct Salary from employees
+select distinct department_id from employees
+
+--add operator -- 
+
+select * from Employees
+where first_name = 'john' and salary > 3000
+
+--or operator  any one condition
+
+select * from Employees
+where first_name = 'john' or salary > 10000
+
+-- not 
+select * from Employees
+where  Not first_name = 'john'
+
+-- operator 
+ need data 10,20 30 
+select * from employees
+where  department_id In(10,20,30 )
+
+select * from employees 
+where department_id <= 30;
+
+-- between operator 
+-- 10000 to 2000 salary 
+select * from employees
+where salary between 10000 and 20000
+
+-ans
+
+select * from employees
+where salary >= 10000 and  salary <= 20000
+
+--Limit and offest 
+
+select * from employees
+limit 10 offset 10

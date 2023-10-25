@@ -1,0 +1,54 @@
+From the following table, write a SQL query to list the employee ID, name, hire date, 
+current date and experience of the employees in ascending order on their experiences. 
+ in mysql
+
+SELECT
+    employee_id,
+    employee_name,
+    hire_date,
+    CURDATE() AS current_date,
+    DATEDIFF(CURDATE(), hire_date) AS experience
+FROM
+    employees
+ORDER BY
+    experience ASC;
+From the following table, write a SQL query to list the employees in ascending order of
+ designations of those joined after the second half of 1991
+
+SELECT
+    employee_id,
+    designation
+FROM
+    employees
+WHERE
+    YEAR(join_date) = 1991 AND MONTH(join_date) >= 7
+    OR YEAR(join_date) > 1991
+ORDER BY
+    designation ASC;
+
+
+
+CREATE TABLE employeedetails (
+    id INT NOT NULL,
+    name VARCHAR(255),
+    emailid VARCHAR(255)
+);
+
+
+-- Inserting sample data into the employeedetails table
+INSERT INTO employeedetails (id, name, emailid)
+VALUES
+    (1, 'John Smith', 'john.smith@example.com'),
+    (2, 'Jane Doe', 'jane.doe@example.com'),
+    (3, 'Alice Johnson', 'alice.johnson@example.com'),
+    (4, 'Bob Brown', 'bob.brown@example.com'),
+    (5, 'Eve White', 'eve.white@example.com');
+-- Inserting sample data into the employeedetails table
+INSERT INTO employeedetails (id, name, emailid)
+VALUES
+    (1, 'John Smith', 'john.smith@example.com'),
+    (2, 'Jane Doe', 'jane.doe@example.com'),
+    (3, 'Alice Johnson', 'alice.johnson@example.com'),
+    (4, 'Bob Brown', 'bob.brown@example.com'),
+    (5, 'Eve White', 'eve.white@example.com');
+
